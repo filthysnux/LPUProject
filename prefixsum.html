@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Prefix Sum Calculator</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to right, #fceabb, #e8f0f7);
+    }
+
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 50px;
+      background: transparent;
+    }
+
+    .logo {
+      font-weight: bold;
+      color: white;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 20px;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      background-color: #a84444;
+      padding: 10px 20px;
+      border-radius: 25px;
+      color: white;
+      font-weight: bold;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+      transition: 0.3s;
+    }
+
+    .nav-links a:hover {
+      background-color: #8a2c2c;
+    }
+
+    .main-content {
+      text-align: center;
+      margin-top: 60px;
+    }
+
+    .main-content h1 {
+      font-size: 48px;
+      color: red;
+      font-weight: bold;
+    }
+
+    .search-bar {
+      margin: 20px auto;
+      width: 300px;
+      padding: 10px;
+      border-radius: 25px;
+      border: 1px solid #ccc;
+      text-align: center;
+      outline: none;
+    }
+
+    textarea {
+      margin-top: 20px;
+      width: 90%;
+      max-width: 500px;
+      height: 100px;
+      padding: 15px;
+      border-radius: 10px;
+      border: 1px solid #999;
+      background: #f4f4f4;
+      font-size: 16px;
+    }
+
+    button {
+      margin-top: 20px;
+      padding: 12px 30px;
+      background-color: #f56d6d;
+      border: none;
+      border-radius: 20px;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    button:hover {
+      background-color: #e44848;
+    }
+
+    .output {
+      margin-top: 30px;
+      font-size: 18px;
+      color: #333;
+    }
+
+    .scroll-msg {
+      text-align: center;
+      margin-top: 40px;
+      font-size: 14px;
+      color: #666;
+    }
+
+    .bottom-section {
+      margin-top: 60px;
+      padding: 50px;
+      background: linear-gradient(to right, #84fab0, #8fd3f4);
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="navbar">
+    <div class="logo">Laptop Service</div>
+    <div class="nav-links">
+      <a href="#">HOME</a>
+      <a href="#">SERVICES</a>
+      <a href="#">ABOUT US</a>
+      <a href="#">CONTACT</a>
+    </div>
+  </div>
+
+  <div class="main-content">
+    <h1>Explore</h1>
+    <input class="search-bar" type="text" placeholder="Search.." />
+    <br>
+    <textarea id="inputArray" placeholder="Enter numbers separated by commas (e.g. 1,2,3)"></textarea>
+    <br>
+    <button onclick="calculatePrefixSum()">Let Me Check It</button>
+    <div class="output" id="result"></div>
+    <div class="scroll-msg">↓ Scroll Down</div>
+  </div>
+
+  <div class="bottom-section">
+    <h2>Thank you for using the Prefix Sum Calculator!</h2>
+    <p>Come back anytime to compute more 😊</p>
+  </div>
+
+  <script>
+    function calculatePrefixSum() {
+      const input = document.getElementById("inputArray").value.trim();
+      if (!input) {
+        document.getElementById("result").innerText = "❌ Please enter some numbers.";
+        return;
+      }
+
+      const numbers = input.split(",").map(n => parseInt(n.trim()));
+      if (numbers.some(isNaN)) {
+        document.getElementById("result").innerText = "❌ Invalid input! Use only numbers separated by commas.";
+        return;
+      }
+
+      let prefixSum = [];
+      let sum = 0;
+      for (let i = 0; i < numbers.length; i++) {
+        sum += numbers[i];
+        prefixSum.push(sum);
+      }
+
+      document.getElementById("result").innerText = "✅ Prefix Sum: " + prefixSum.join(", ");
+    }
+  </script>
+
+</body>
+</html>
